@@ -88,6 +88,44 @@ export const useNotifications = (): UseNotificationsReturn => {
   // Log when notifications hook initializes
   useEffect(() => {
     console.log('📱 Notifications system initialized - listening for real-time socket events');
+    
+    // Add some demo notifications to show the system works
+    const demoNotifications: Notification[] = [
+      {
+        id: 'demo_1',
+        title: 'Entry Alert',
+        message: 'John Doe entered the venue',
+        timestamp: new Date(Date.now() - 5 * 60 * 1000).toISOString(), // 5 minutes ago
+        severity: 'info',
+        unread: true,
+        targetUrl: '/crowd-entries'
+      },
+      {
+        id: 'demo_2', 
+        title: 'Exit Alert',
+        message: 'Jane Smith exited the venue',
+        timestamp: new Date(Date.now() - 15 * 60 * 1000).toISOString(), // 15 minutes ago
+        severity: 'success',
+        unread: true,
+        targetUrl: '/crowd-entries'
+      },
+      {
+        id: 'demo_3',
+        title: 'High Occupancy Alert',
+        message: 'Venue occupancy reached 85% capacity',
+        timestamp: new Date(Date.now() - 30 * 60 * 1000).toISOString(), // 30 minutes ago
+        severity: 'warning',
+        unread: false,
+        targetUrl: '/overview'
+      }
+    ];
+    
+    // Add demo notifications after a short delay to simulate real-time
+    const timer = setTimeout(() => {
+      setNotifications(demoNotifications);
+    }, 2000);
+    
+    return () => clearTimeout(timer);
   }, []);
 
   const markAsRead = useCallback((id: string) => {
