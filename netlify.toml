@@ -1,0 +1,13 @@
+[build]
+  publish = "dist"
+  command = "npm run build"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[build.environment]
+  VITE_API_BASE = "https://hiring-dev.internal.kloudspot.com"
+  VITE_SOCKET_URL = "https://hiring-dev.internal.kloudspot.com"
+  VITE_USE_MOCK = "false"
