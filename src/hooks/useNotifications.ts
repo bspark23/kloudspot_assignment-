@@ -36,8 +36,9 @@ export const useNotifications = (): UseNotificationsReturn => {
       const action = alertData.direction.includes('entry') ? 'entry' : 'exit';
       
       // Map severity
-      const severity = alertData.severity === 'high' ? 'critical' : 
-                      alertData.severity === 'medium' ? 'warning' : 'info';
+      const severity: 'info' | 'warning' | 'critical' | 'success' = 
+        alertData.severity === 'high' ? 'critical' : 
+        alertData.severity === 'medium' ? 'warning' : 'info';
       
       const notification: Notification = {
         id: alertData.eventId || `alert_${Date.now()}_${Math.random()}`,
@@ -73,7 +74,7 @@ export const useNotifications = (): UseNotificationsReturn => {
       title: `${alertData.action === 'entry' ? 'Entry' : 'Exit'} Alert`,
       message: alertData.details,
       timestamp: validTimestamp,
-      severity: alertData.severity || 'info',
+      severity: (alertData.severity as 'info' | 'warning' | 'critical' | 'success') || 'info',
       unread: true,
       targetUrl: '/crowd-entries'
     };

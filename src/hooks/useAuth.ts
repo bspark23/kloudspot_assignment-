@@ -2,7 +2,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authApi, LoginRequest, User } from '../api/auth';
-import { simulationApi } from '../api/simulation';
+// import { simulationApi } from '../api/simulation';
 
 interface UseAuthReturn {
   user: User | null;

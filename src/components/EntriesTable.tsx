@@ -1,7 +1,7 @@
 // Entries table component with pagination
 import React from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { EntryRecord } from '../api/entries';
+import type { EntryRecord } from '../api/analytics';
 
 interface EntriesTableProps {
   entries: EntryRecord[];
@@ -161,7 +161,7 @@ export const EntriesTable: React.FC<EntriesTableProps> = ({
                         // Fallback to initials if image fails
                         const target = e.target as HTMLImageElement;
                         target.style.display = 'none';
-                        const initials = entry.name.split(' ').map(n => n[0]).join('').toUpperCase();
+                        const initials = entry.name.split(' ').map((n: string) => n[0]).join('').toUpperCase();
                         const fallback = document.createElement('div');
                         fallback.className = 'h-10 w-10 rounded-full bg-gray-300 flex items-center justify-center text-gray-700 font-medium text-sm mr-3';
                         fallback.textContent = initials;
