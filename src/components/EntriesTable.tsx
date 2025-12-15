@@ -121,6 +121,20 @@ export const EntriesTable: React.FC<EntriesTableProps> = ({
     );
   }
 
+  // Show empty state if no entries
+  if (!loading && entries.length === 0) {
+    return (
+      <div className="bg-white rounded-lg border border-gray-200 p-6">
+        <div className="text-center">
+          <p className="text-gray-500 mb-2">No entries found</p>
+          <p className="text-sm text-gray-400">
+            Entry data will appear here when people enter/exit the monitored area
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-white rounded-lg border border-gray-200">
       {/* Table */}

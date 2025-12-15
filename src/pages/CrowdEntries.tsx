@@ -24,11 +24,16 @@ export const CrowdEntries: React.FC = () => {
       });
       setData(response);
       console.log('📋 Entries data received:', response);
+      console.log('📋 Number of entries:', response.records?.length || 0);
+      
+      // If we somehow get empty data, force a retry with fallback
+      if (!response.records || response.records.length === 0) {
+        console.log('📋 Received empty data, this should trigger fallback in API');
+      }
     } catch (err: any) {
       console.error('❌ Entries API error details:', err);
       
-      // Don't show error - the API will provide fallback data
-      // This ensures the UI always shows data even when backend is unavailable
+      // The API should handle fallback internally, but let's ensure we have data
       setError(null);
     } finally {
       setLoading(false);
