@@ -25,21 +25,29 @@ export const entriesApi = {
     } catch (error: any) {
       console.warn('⚠️ Entries API connection issue - providing demonstration data');
       
-      // Generate realistic demonstration data
+      // Generate realistic demonstration data with more recent entries
       const names = [
         'John Smith', 'Jane Doe', 'Michael Johnson', 'Sarah Wilson', 'David Brown',
         'Emily Davis', 'Robert Miller', 'Lisa Anderson', 'James Taylor', 'Maria Garcia',
         'Christopher Martinez', 'Jennifer Rodriguez', 'Matthew Lopez', 'Ashley Hernandez',
-        'Joshua Gonzalez', 'Amanda Perez', 'Daniel Torres', 'Stephanie Flores'
+        'Joshua Gonzalez', 'Amanda Perez', 'Daniel Torres', 'Stephanie Flores',
+        'Kevin Wilson', 'Rachel Green', 'Mark Thompson', 'Laura White', 'Steven Clark',
+        'Michelle Lewis', 'Brian Hall', 'Nicole Young', 'Ryan King', 'Jessica Wright'
       ];
       
       const sampleEntries = Array.from({ length: params.limit }, (_, i) => {
-        const entryTime = new Date(Date.now() - Math.random() * 24 * 60 * 60 * 1000);
-        const exitTime = Math.random() > 0.3 ? new Date(entryTime.getTime() + Math.random() * 4 * 60 * 60 * 1000) : null;
+        // Generate entries from the last 8 hours to show recent activity
+        const hoursAgo = Math.random() * 8;
+        const entryTime = new Date(Date.now() - hoursAgo * 60 * 60 * 1000);
+        
+        // 70% chance of having an exit time
+        const exitTime = Math.random() > 0.3 ? 
+          new Date(entryTime.getTime() + (Math.random() * 3 + 0.5) * 60 * 60 * 1000) : null;
+        
         const randomName = names[Math.floor(Math.random() * names.length)];
         
         return {
-          id: `demo_${params.page}_${i}`,
+          id: `demo_${params.page}_${i}_${Date.now()}`,
           name: randomName,
           gender: Math.random() > 0.5 ? 'Male' : 'Female' as 'Male' | 'Female',
           entryTime: entryTime.toISOString(),
@@ -48,10 +56,10 @@ export const entriesApi = {
       });
 
       return {
-        totalRecords: 150, // Demo total
+        totalRecords: 250, // Demo total - more realistic number
         pageNumber: params.page,
         pageSize: params.limit,
-        totalPages: Math.ceil(150 / params.limit),
+        totalPages: Math.ceil(250 / params.limit),
         records: sampleEntries
       };
     }

@@ -1,12 +1,10 @@
 // Main layout component with responsive sidebar navigation
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { 
   Home, 
   Table, 
-  MapPin,
-  Menu,
-  X
+  MapPin
 } from 'lucide-react';
 import { NotificationsDropdown } from './NotificationsDropdown';
 import LogoutButton from './LogoutButton';
