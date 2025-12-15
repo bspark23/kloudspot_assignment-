@@ -25,9 +25,16 @@ export const useFootfall = (): UseFootfallReturn => {
     } catch (err: any) {
       console.error('❌ Footfall API error details:', err);
       
-      // Don't show error - the API will provide fallback data
-      // This ensures the UI always shows data even when backend is unavailable
-      setError(null);
+      // The API handles fallback internally, so we should still get data
+      // Let's try to get the fallback data
+      try {
+        const fallbackResponse = await analyticsApi.getFootfall();
+        setData(fallbackResponse);
+        console.log('📊 Footfall fallback data received:', fallbackResponse);
+      } catch (fallbackErr) {
+        console.error('❌ Footfall fallback also failed:', fallbackErr);
+        setError(null); // Don't show error to user
+      }
     } finally {
       setLoading(false);
     }

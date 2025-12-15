@@ -1,10 +1,12 @@
-// Main layout component with sidebar navigation
-import React from 'react';
+// Main layout component with responsive sidebar navigation
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { 
   Home, 
   Table, 
-  MapPin
+  MapPin,
+  Menu,
+  X
 } from 'lucide-react';
 import { NotificationsDropdown } from './NotificationsDropdown';
 import LogoutButton from './LogoutButton';
@@ -40,8 +42,29 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         
         {/* Clickable navigation overlay */}
         <div className="relative z-10 h-full flex flex-col">
+          {/* Logo and Brand Section */}
+          <div className="px-4 py-6">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <img 
+                  src="/Vector.png" 
+                  alt="Kloudspot Logo"
+                  className="h-8 w-8 object-contain"
+                />
+                <span className="text-white text-xl font-semibold">kloudspot</span>
+              </div>
+              
+              {/* Hamburger Menu - Three horizontal lines */}
+              <button className="flex flex-col justify-center items-center w-6 h-6 space-y-1">
+                <div className="w-4 h-0.5 bg-white rounded-full"></div>
+                <div className="w-4 h-0.5 bg-white rounded-full"></div>
+                <div className="w-4 h-0.5 bg-white rounded-full"></div>
+              </button>
+            </div>
+          </div>
+          
           {/* Navigation buttons positioned over the frame image */}
-          <nav className="flex-1 pt-24">
+          <nav className="flex-1 pt-8">
             <ul className="space-y-2 px-4">
               {navItems.map((item) => (
                 <li key={item.name}>

@@ -58,8 +58,19 @@ export const Login: React.FC = () => {
         backgroundImage: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
         zIndex: -1
       }}></div>
+
+      {/* Hamburger Menu - Top Right */}
+      <div className="absolute top-6 right-6 z-20">
+        <button className="p-2 rounded-md hover:bg-white/10 transition-colors">
+          <div className="w-6 h-5 flex flex-col justify-between">
+            <div className="w-full h-0.5 bg-white rounded-full"></div>
+            <div className="w-full h-0.5 bg-white rounded-full"></div>
+            <div className="w-full h-0.5 bg-white rounded-full"></div>
+          </div>
+        </button>
+      </div>
       
-      <div className="relative z-10 min-h-screen flex">
+      <div className="relative z-10 min-h-screen flex flex-col lg:flex-row">
         {/* Left side - Welcome text */}
         <div className="flex-1 flex items-center justify-start pl-16">
           <div className="text-white">
